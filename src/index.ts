@@ -30,6 +30,14 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'UP', message: 'Quiz Service is healthy' });
 });
 
+app.get('/about',(req,res)=>{
+  res.status(200).json(
+    {
+      message: 'abc@gmail.com'
+    }
+  )
+})
+
 
 // 3. Server Setup
 const httpServer = createServer(app);
