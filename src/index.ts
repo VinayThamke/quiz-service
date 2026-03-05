@@ -33,7 +33,7 @@ app.get('/health', (req, res) => {
 app.get('/about',(req,res)=>{
   res.status(200).json(
     {
-      message: 'abc123@gmail.com'
+      message: {email:'abc123@gmail.com',phone:"969696969"}
     }
   )
 })
