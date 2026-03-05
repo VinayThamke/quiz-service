@@ -25,6 +25,12 @@ let currentPoll: Poll = {
   ]
 };
 
+// Standard Health Check Route
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'UP', message: 'Quiz Service is healthy' });
+});
+
+
 // 3. Server Setup
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
