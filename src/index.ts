@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { Poll } from "./types.js";
+import { initSocket } from "./socket/socket.service.js";
 
 const app = express();
 const PORT = 4000;
@@ -33,27 +34,9 @@ app.get("/about", (req, res) => {
 
 // 3. Server Setup
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: ["http://localhost:5173", "http://localhost:5001"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-  // ADD THIS: Fixes the "Pending" status by forcing WebSockets
-  transports: ["websocket"],
-});
 
-// 4. Socket Events
-io.on("connection", (socket) => {
-  console.log("✅ User connected:", socket.id);
-
-  // Send initial data
-  socket.emit("poll-update", currentPoll);
-
-  socket.on("disconnect", () => {
-    console.log("❌ User disconnected:", socket.id);
-  });
-});
+// Initialize Socket.io via the service
+initSocket(httpServer);
 
 // 5. Start Server
 httpServer.listen(PORT, () => {
