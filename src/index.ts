@@ -14,9 +14,9 @@ let currentPoll: Poll = {
   id: "poll-123",
   question: "Which SQL database is your favorite?",
   options: [
-    { id: "opt-1", text: "PostgreSQL", votes: 0 },
-    { id: "opt-2", text: "MySQL", votes: 0 },
-    { id: "opt-3", text: "SQLite", votes: 0 },
+    { id: "1", text: "PostgreSQL", votes: 0 },
+    { id: "2", text: "MySQL", votes: 0 },
+    { id: "3", text: "SQLite", votes: 0 },
   ],
 };
 
