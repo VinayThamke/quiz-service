@@ -4,6 +4,8 @@ import { Server } from "socket.io";
 import { Poll } from "./types.js";
 import { initSocket } from "./socket/socket.service.js";
 
+import { initDbListener } from "./models/db.js";
+
 const app = express();
 const PORT = 4000;
 
@@ -35,8 +37,13 @@ app.get("/about", (req, res) => {
 // 3. Server Setup
 const httpServer = createServer(app);
 
+const io = initSocket(httpServer);
+
 // Initialize Socket.io via the service
 initSocket(httpServer);
+
+// 4. Initialize DB Listener for Real-Time Updates
+initDbListener(io);
 
 // 5. Start Server
 httpServer.listen(PORT, () => {
